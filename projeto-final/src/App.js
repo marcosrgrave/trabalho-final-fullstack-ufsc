@@ -231,6 +231,7 @@ function App() {
       </form>
 
       <br></br>
+      <h1>Ver Produtos Cadastrados</h1>
       <button type="submit" onClick={verProduto}>
         Ver produtos cadastrados (console)
       </button>
