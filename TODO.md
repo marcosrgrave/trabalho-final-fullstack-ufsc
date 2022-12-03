@@ -1,0 +1,4 @@
+- [ ] Telas Cadastro Categoria
+- [ ] Consumir API
+- [ ] Upload Imagem
+- [ ] Autenticação API
