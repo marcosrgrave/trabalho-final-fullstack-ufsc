@@ -2,27 +2,27 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 import Header from "./Header";
-import Table from "./Table";
+import TableCategories from "./TableCategories";
 import Add from "./Add";
 import Edit from "./Edit";
 
-import { productsData } from "../../data";
+import { categoriesData } from "../../data";
 
-const DashboardProducts = ({ setIsAuthenticated }) => {
-  const [products, setProducts] = useState(productsData);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+const DashboardCategorias = ({ setIsAuthenticated }) => {
+  const [categories, setCategories] = useState(categoriesData);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("products_data"));
-    if (data !== null && Object.keys(data).length !== 0) setProducts(data);
+    const data = JSON.parse(localStorage.getItem("categories_data"));
+    if (data !== null && Object.keys(data).length !== 0) setCategories(data);
   }, []);
 
   const handleEdit = (id) => {
-    const [product] = products.filter((product) => product.id === id);
+    const [category] = categories.filter((category) => category.id === id);
 
-    setSelectedProduct(product);
+    setSelectedCategory(category);
     setIsEditing(true);
   };
 
@@ -36,19 +36,19 @@ const DashboardProducts = ({ setIsAuthenticated }) => {
       cancelButtonText: "Não, cancelar!",
     }).then((result) => {
       if (result.value) {
-        const [Product] = products.filter((Product) => Product.id === id);
+        const [Category] = categories.filter((Category) => Category.id === id);
 
         Swal.fire({
           icon: "success",
           title: "Deletado!",
-          text: `${Product.name} deletado.`,
+          text: `${Category.name} deletado.`,
           showConfirmButton: false,
           timer: 1200,
         });
 
-        const productsCopy = products.filter((product) => product.id !== id);
-        localStorage.setItem("products_data", JSON.stringify(productsCopy));
-        setProducts(productsCopy);
+        const categoriesCopy = categories.filter((category) => category.id !== id);
+        localStorage.setItem("categories_data", JSON.stringify(categoriesCopy));
+        setCategories(categoriesCopy);
       }
     });
   };
@@ -61,8 +61,9 @@ const DashboardProducts = ({ setIsAuthenticated }) => {
             setIsAdding={setIsAdding}
             setIsAuthenticated={setIsAuthenticated}
           />
-          <Table
-            products={products}
+          <TableCategories
+            categories={categories}
+            // handleProdutos={handleProdutos}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />
@@ -70,16 +71,16 @@ const DashboardProducts = ({ setIsAuthenticated }) => {
       )}
       {isAdding && (
         <Add
-          products={products}
-          setProducts={setProducts}
+          categories={categories}
+          setCategories={setCategories}
           setIsAdding={setIsAdding}
         />
       )}
       {isEditing && (
         <Edit
-          products={products}
-          selectedEmployee={selectedProduct}
-          setProducts={setProducts}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setCategories={setCategories}
           setIsEditing={setIsEditing}
         />
       )}
@@ -87,4 +88,4 @@ const DashboardProducts = ({ setIsAuthenticated }) => {
   );
 };
 
-export default DashboardProducts;
+export default DashboardCategorias;

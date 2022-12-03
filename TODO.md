@@ -1,4 +1,5 @@
-- [ ] Telas Cadastro Categoria
-- [ ] Consumir API
-- [ ] Upload Imagem
-- [ ] Autenticação API
+- [X] Telas Cadastro Categoria + CRUD
+- [ ] Home Page com dois botões: Produtos e Categorias
+- [ ] Consumir API (axios)
+- [ ] Upload Imagem (puxar do projeto-final-base)
+- [ ] Autenticação via API (bônus)

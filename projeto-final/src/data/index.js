@@ -72,3 +72,49 @@ const productsData = [
 ];
 
 export { productsData };
+
+const categoriesData = [
+  {
+    id: 1,
+    name: "Susan",
+  },
+  {
+    id: 2,
+    name: "Adrienne",
+  },
+  {
+    id: 3,
+    name: "Rolf",
+  },
+  {
+    id: 4,
+    name: "Kent",
+  },
+  {
+    id: 5,
+    name: "Arsenio",
+  },
+  {
+    id: 6,
+    name: "Laurena",
+  },
+  {
+    id: 7,
+    name: "George",
+    image: "90000",
+  },
+  {
+    id: 8,
+    name: "Jesica",
+  },
+  {
+    id: 9,
+    name: "Matthew",
+  },
+  {
+    id: 10,
+    name: "Lyndsey",
+  },
+];
+
+export { categoriesData };
