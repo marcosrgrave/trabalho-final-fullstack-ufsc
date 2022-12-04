@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const EditProduct = ({
   employees: products,
@@ -26,17 +27,25 @@ const EditProduct = ({
       });
     }
 
-    const employee = {
-      id,
+    const product = {
+      // id,
       name: name,
       price: price,
-      stockAmount: stockAmount,
+      stock_amount: stockAmount,
       image: image,
     };
 
+    const url = "http://localhost:8080/produtos/" + id;
+    const config = {
+      headers: {},
+    };
+    axios.put(url, product, config).then((response) => {
+      console.log(response.data);
+    });
+
     for (let i = 0; i < products.length; i++) {
       if (products[i].id === id) {
-        products.splice(i, 1, employee);
+        products.splice(i, 1, product);
         break;
       }
     }
@@ -48,7 +57,7 @@ const EditProduct = ({
     Swal.fire({
       icon: "success",
       title: "Atualizado!",
-      text: `${employee.name} atualizado.`,
+      text: `${product.name} atualizado.`,
       showConfirmButton: false,
       timer: 1200,
     });

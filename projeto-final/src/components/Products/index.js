@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 import Header from "./Header";
 import Table from "./Table";
 import Add from "./Add";
 import Edit from "./Edit";
 
-import { productsData } from "../../data";
+// import { productsData } from "../../data";
+import { fetchData } from "../../data";
 
 const Dashboard = ({ setIsAuthenticated }) => {
-  const [products, setProducts] = useState(productsData);
+  // const [products, setProducts] = useState(productsData);
+  const [products, setProducts] = useState(fetchData());
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -38,6 +41,12 @@ const Dashboard = ({ setIsAuthenticated }) => {
       if (result.value) {
         const [Product] = products.filter((Product) => Product.id === id);
 
+        axios
+          .delete("http://localhost:8080/produtos/" + id)
+          .then((response) => {
+            console.log(response.data);
+          });
+
         Swal.fire({
           icon: "success",
           title: "Deletado!",
@@ -62,7 +71,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
             setIsAuthenticated={setIsAuthenticated}
           />
           <Table
-            employees={products}
+            products={products}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />
@@ -70,16 +79,16 @@ const Dashboard = ({ setIsAuthenticated }) => {
       )}
       {isAdding && (
         <Add
-          employees={products}
-          setEmployees={setProducts}
+          products={products}
+          setProducts={setProducts}
           setIsAdding={setIsAdding}
         />
       )}
       {isEditing && (
         <Edit
-          employees={products}
-          selectedEmployee={selectedProduct}
-          setEmployees={setProducts}
+          products={products}
+          selectedProduct={selectedProduct}
+          setProducts={setProducts}
           setIsEditing={setIsEditing}
         />
       )}

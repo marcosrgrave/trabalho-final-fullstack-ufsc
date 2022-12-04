@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddProduct = ({
   employees: products,
@@ -23,14 +24,18 @@ const AddProduct = ({
       });
     }
 
-    const id = products.length + 1;
+    // const id = products.length + 1;
     const newProduct = {
-      id,
+      // id,
       name: name,
       price: price,
-      stockAmount: stockAmount,
+      stock_amount: stockAmount,
       image: image,
     };
+
+    axios.post("http://localhost:8080/produtos", newProduct).then((response) => {
+      console.log(response.data);
+    });
 
     products.push(newProduct);
     localStorage.setItem("products_data", JSON.stringify(products));
