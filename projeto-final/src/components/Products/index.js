@@ -7,12 +7,12 @@ import Table from "./Table";
 import Add from "./Add";
 import Edit from "./Edit";
 
-// import { productsData } from "../../data";
-import { fetchData } from "../../data";
+import { productsData } from "../../data";
+// import { fetchData } from "../../data";
 
 const Dashboard = ({ setIsAuthenticated }) => {
-  // const [products, setProducts] = useState(productsData);
-  const [products, setProducts] = useState(fetchData());
+  const [products, setProducts] = useState(productsData);
+  // const [products, setProducts] = useState(fetchData());
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
